@@ -13,3 +13,6 @@ my_feature_list.pkl
 tools
 maildir
 final_project/emails_by_address
+enron_mail_20150507.tgz
+.idea/
+*.tgz
