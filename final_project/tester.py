@@ -69,6 +69,13 @@ def test_classifier(clf, dataset, feature_list, folds = 1000):
     except:
         print "Got a divide by zero when trying out:", clf
 
+    return {
+        'accuracy' : accuracy,
+        'precision' : precision,
+        'recall' : recall,
+        'f1' : f1
+    }
+
 CLF_PICKLE_FILENAME = "my_classifier.pkl"
 DATASET_PICKLE_FILENAME = "my_dataset.pkl"
 FEATURE_LIST_FILENAME = "my_feature_list.pkl"

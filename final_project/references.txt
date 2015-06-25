@@ -1,0 +1,2 @@
+http://stackoverflow.com/questions/613183/sort-a-python-dictionary-by-value
+http://stackoverflow.com/questions/10231206/can-scipy-stats-identify-and-mask-obvious-outliers
