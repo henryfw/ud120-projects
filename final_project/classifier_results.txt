@@ -1,0 +1,266 @@
+/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python2.7 /Users/hwang/Documents/git/ud120-projects/final_project/task_5.py
+GaussianNB()
+	Accuracy: 0.84533	Precision: 0.34586	Recall: 0.17950	F1: 0.23634	F2: 0.19861
+	Total predictions: 15000	True positives:  359	False positives:  679	False negatives: 1641	True negatives: 12321
+
+SVC(C=10.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel='linear', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.86660	Precision: 0.46154	Recall: 0.00300	F1: 0.00596	F2: 0.00374
+	Total predictions: 15000	True positives:    6	False positives:    7	False negatives: 1994	True negatives: 12993
+
+SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.86680	Precision: 0.60000	Recall: 0.00300	F1: 0.00597	F2: 0.00375
+	Total predictions: 15000	True positives:    6	False positives:    4	False negatives: 1994	True negatives: 12996
+
+SVC(C=1000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.86660	Precision: 0.46154	Recall: 0.00300	F1: 0.00596	F2: 0.00374
+	Total predictions: 15000	True positives:    6	False positives:    7	False negatives: 1994	True negatives: 12993
+
+SVC(C=10000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.86660	Precision: 0.46154	Recall: 0.00300	F1: 0.00596	F2: 0.00374
+	Total predictions: 15000	True positives:    6	False positives:    7	False negatives: 1994	True negatives: 12993
+
+SVC(C=10.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel='rbf', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.87593	Precision: 1.00000	Recall: 0.06950	F1: 0.12997	F2: 0.08539
+	Total predictions: 15000	True positives:  139	False positives:    0	False negatives: 1861	True negatives: 13000
+
+SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.87753	Precision: 0.74622	Recall: 0.12350	F1: 0.21193	F2: 0.14824
+	Total predictions: 15000	True positives:  247	False positives:   84	False negatives: 1753	True negatives: 12916
+
+SVC(C=1000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.88047	Precision: 0.74468	Recall: 0.15750	F1: 0.26001	F2: 0.18699
+	Total predictions: 15000	True positives:  315	False positives:  108	False negatives: 1685	True negatives: 12892
+
+SVC(C=10000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False)
+	Accuracy: 0.88180	Precision: 0.75391	Recall: 0.16850	F1: 0.27544	F2: 0.19948
+	Total predictions: 15000	True positives:  337	False positives:  110	False negatives: 1663	True negatives: 12890
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=1,
+            random_state=None, splitter='best')
+	Accuracy: 0.82647	Precision: 0.34978	Recall: 0.35100	F1: 0.35039	F2: 0.35075
+	Total predictions: 15000	True positives:  702	False positives: 1305	False negatives: 1298	True negatives: 11695
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            random_state=None, splitter='best')
+	Accuracy: 0.82633	Precision: 0.35062	Recall: 0.35500	F1: 0.35280	F2: 0.35411
+	Total predictions: 15000	True positives:  710	False positives: 1315	False negatives: 1290	True negatives: 11685
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=3,
+            random_state=None, splitter='best')
+	Accuracy: 0.82573	Precision: 0.34479	Recall: 0.34100	F1: 0.34289	F2: 0.34175
+	Total predictions: 15000	True positives:  682	False positives: 1296	False negatives: 1318	True negatives: 11704
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=4,
+            random_state=None, splitter='best')
+	Accuracy: 0.82887	Precision: 0.35860	Recall: 0.35950	F1: 0.35905	F2: 0.35932
+	Total predictions: 15000	True positives:  719	False positives: 1286	False negatives: 1281	True negatives: 11714
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=5,
+            random_state=None, splitter='best')
+	Accuracy: 0.83393	Precision: 0.37494	Recall: 0.36800	F1: 0.37144	F2: 0.36937
+	Total predictions: 15000	True positives:  736	False positives: 1227	False negatives: 1264	True negatives: 11773
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=8,
+            random_state=None, splitter='best')
+	Accuracy: 0.83627	Precision: 0.36957	Recall: 0.32300	F1: 0.34472	F2: 0.33135
+	Total predictions: 15000	True positives:  646	False positives: 1102	False negatives: 1354	True negatives: 11898
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=10,
+            random_state=None, splitter='best')
+	Accuracy: 0.85100	Precision: 0.43786	Recall: 0.41400	F1: 0.42560	F2: 0.41856
+	Total predictions: 15000	True positives:  828	False positives: 1063	False negatives: 1172	True negatives: 11937
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=15,
+            random_state=None, splitter='best')
+	Accuracy: 0.84373	Precision: 0.37679	Recall: 0.26300	F1: 0.30978	F2: 0.27991
+	Total predictions: 15000	True positives:  526	False positives:  870	False negatives: 1474	True negatives: 12130
+
+DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=20,
+            random_state=None, splitter='best')
+	Accuracy: 0.85120	Precision: 0.40980	Recall: 0.26350	F1: 0.32075	F2: 0.28376
+	Total predictions: 15000	True positives:  527	False positives:  759	False negatives: 1473	True negatives: 12241
+
+AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None)
+	Accuracy: 0.86300	Precision: 0.48000	Recall: 0.33000	F1: 0.39111	F2: 0.35200
+	Total predictions: 15000	True positives:  660	False positives:  715	False negatives: 1340	True negatives: 12285
+
+[{'accuracy': 0.851,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=10,
+            random_state=None, splitter='best'),
+  'f1': 0.425597532767926,
+  'precision': 0.4378635642517187,
+  'recall': 0.414},
+ {'accuracy': 0.863,
+  'classifier': AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None,
+          learning_rate=1.0, n_estimators=50, random_state=None),
+  'f1': 0.39111111111111113,
+  'precision': 0.48,
+  'recall': 0.33},
+ {'accuracy': 0.8339333333333333,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=5,
+            random_state=None, splitter='best'),
+  'f1': 0.3714357809740096,
+  'precision': 0.37493632195618953,
+  'recall': 0.368},
+ {'accuracy': 0.8288666666666666,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=4,
+            random_state=None, splitter='best'),
+  'f1': 0.35905118601747815,
+  'precision': 0.35860349127182045,
+  'recall': 0.3595},
+ {'accuracy': 0.8263333333333334,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=2,
+            random_state=None, splitter='best'),
+  'f1': 0.3527950310559006,
+  'precision': 0.3506172839506173,
+  'recall': 0.355},
+ {'accuracy': 0.8264666666666667,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=1,
+            random_state=None, splitter='best'),
+  'f1': 0.35038682305964564,
+  'precision': 0.34977578475336324,
+  'recall': 0.351},
+ {'accuracy': 0.8362666666666667,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=8,
+            random_state=None, splitter='best'),
+  'f1': 0.3447171824973319,
+  'precision': 0.3695652173913043,
+  'recall': 0.323},
+ {'accuracy': 0.8257333333333333,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=3,
+            random_state=None, splitter='best'),
+  'f1': 0.342885872297637,
+  'precision': 0.3447927199191102,
+  'recall': 0.341},
+ {'accuracy': 0.8453333333333334,
+  'classifier': GaussianNB(),
+  'f1': 0.23633969716919026,
+  'precision': 0.34585741811175336,
+  'recall': 0.1795},
+ {'accuracy': 0.8666,
+  'classifier': SVC(C=10.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel='linear', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.005961251862891207,
+  'precision': 0.46153846153846156,
+  'recall': 0.003},
+ {'accuracy': 0.8668,
+  'classifier': SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.005970149253731343,
+  'precision': 0.6,
+  'recall': 0.003},
+ {'accuracy': 0.8666,
+  'classifier': SVC(C=1000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.005961251862891207,
+  'precision': 0.46153846153846156,
+  'recall': 0.003},
+ {'accuracy': 0.8666,
+  'classifier': SVC(C=10000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='linear', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.005961251862891207,
+  'precision': 0.46153846153846156,
+  'recall': 0.003},
+ {'accuracy': 0.8759333333333333,
+  'classifier': SVC(C=10.0, cache_size=200, class_weight=None, coef0=0.0, degree=3, gamma=0.0,
+  kernel='rbf', max_iter=-1, probability=False, random_state=None,
+  shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.12996727442730246,
+  'precision': 1.0,
+  'recall': 0.0695},
+ {'accuracy': 0.8775333333333334,
+  'classifier': SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.21192621192621192,
+  'precision': 0.7462235649546828,
+  'recall': 0.1235},
+ {'accuracy': 0.8804666666666666,
+  'classifier': SVC(C=1000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.260008254230293,
+  'precision': 0.7446808510638298,
+  'recall': 0.1575},
+ {'accuracy': 0.8818,
+  'classifier': SVC(C=10000.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
+  gamma=0.0, kernel='rbf', max_iter=-1, probability=False,
+  random_state=None, shrinking=True, tol=0.001, verbose=False),
+  'f1': 0.27543931344503475,
+  'precision': 0.7539149888143176,
+  'recall': 0.1685},
+ {'accuracy': 0.8437333333333333,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=15,
+            random_state=None, splitter='best'),
+  'f1': 0.30977620730270905,
+  'precision': 0.37679083094555876,
+  'recall': 0.263},
+ {'accuracy': 0.8512,
+  'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=20,
+            random_state=None, splitter='best'),
+  'f1': 0.32075471698113206,
+  'precision': 0.4097978227060653,
+  'recall': 0.2635}]
+Best Classifier: 
+{'f1': 0.425597532767926, 'recall': 0.414, 'classifier': DecisionTreeClassifier(compute_importances=None, criterion='gini',
+            max_depth=None, max_features=None, max_leaf_nodes=None,
+            min_density=None, min_samples_leaf=1, min_samples_split=10,
+            random_state=None, splitter='best'), 'precision': 0.4378635642517187, 'accuracy': 0.851}
+

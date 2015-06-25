@@ -9,13 +9,24 @@ from sklearn import tree
 from scipy import stats
 from sklearn.decomposition import *
 
-# test all feature importance in decision tree
-features_list = ['poi', 'salary', 'deferral_payments', 'total_payments', 'loan_advances', 'bonus', 'restricted_stock_deferred', 'deferred_income', 'total_stock_value', 'expenses', 'exercised_stock_options', 'other', 'long_term_incentive', 'restricted_stock', 'director_fees']
-
-my_dataset = cPickle.load(open("final_project_dataset.pkl", "r") )
-del my_dataset['TOTAL']# remove TOTAL
+import task_2, task_3, task_3_helper
 
 
+# remove outlier that we find later and add new feature to test pca
+all_feature_list =  ['poi', 'salary', 'deferral_payments', 'total_payments', 'loan_advances', 'bonus',
+                 'restricted_stock_deferred', 'deferred_income', 'total_stock_value', 'expenses',
+                 'exercised_stock_options', 'other', 'long_term_incentive', 'restricted_stock', 'director_fees',
+                 'fraction_from_poi', 'fraction_to_poi', 'fraction_to_shared_with_poi'
+        ]
+data_dict = cPickle.load(open("final_project_dataset.pkl", "r") )
+data_dict = task_2.remove_outlier(data_dict)
+data_dict = task_3_helper.add_new_feature(data_dict)
+data_dict = task_3_helper.normalize(data_dict, all_feature_list)
+
+
+
+def get_all_possible_feature_list() :
+    return all_feature_list
 
 
 # fields after investigating with the run() function
@@ -25,7 +36,7 @@ def get_feature_list() :
     # items = ['poi', 'exercised_stock_options', 'total_payments', 'bonus' ]
 
     # from pca 1st component:  'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options'
-    items = ['poi', 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options' ]
+    items = ['poi', 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options', 'fraction_to_shared_with_poi' ]
     return items
 
 
@@ -35,32 +46,29 @@ def run() :
 
 
 def test_pca_eigenvalue() :
-    data = featureFormat(my_dataset, features_list, sort_keys = True)
+    #pprint.pprint( data_dict )
+    data = featureFormat(data_dict, all_feature_list, sort_keys = True)
     labels, features = targetFeatureSplit(data)
     pca = PCA().fit(features)
     eigenfaces = pca.explained_variance_ratio_
 
     print [ "%.5f" % i for i in eigenfaces ]
-    '''
-['0.80547', '0.14734', '0.01642', '0.01472', '0.00748', '0.00439', '0.00204', '0.00125', '0.00074', '0.00010', '0.00005', '0.00001', '0.00000', '0.00000']
-# According to this, first 1 component is very important
-'''
     print [ "%.5f" % abs(i) for i in pca.components_[0] ]
 '''
-['0.00825', '0.00689', '0.68172', '0.51338', '0.05344', '0.00500', '0.00689', '0.40506', '0.00057', '0.29293', '0.07376', '0.02762', '0.11211', '0.00017']
+['0.00825', '0.00689', '0.68172', '0.51338', '0.05344', '0.00500', '0.00689', '0.40506', '0.00057', '0.29293', '0.07376', '0.02762', '0.11211', '0.00017', '0.00000', '0.00000']
 # first component is has high abs values for 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options'
 '''
 
 def test_dt_importance():
-    clf = tree.DecisionTreeClassifier(min_samples_split=5)
+    clf = tree.DecisionTreeClassifier(min_samples_split=10)
     importances = {}
     for _ in range(100):
-        data = featureFormat(my_dataset, features_list, sort_keys = True)
+        data = featureFormat(data_dict, get_all_possible_feature_list(), sort_keys = True)
         labels, features = targetFeatureSplit(data)
         clf.fit(features, labels)
 
         for i in range(len(clf.feature_importances_)) :
-            key = str(features_list[i+1]) + ' ' + str(i+1)
+            key = str(get_all_possible_feature_list()[i+1]) + ' ' + str(i+1)
             if key not in importances :
                 importances[key] = 0
 
@@ -74,20 +82,23 @@ def test_dt_importance():
 
     '''
  # after removing 'TOTAL' outlier
-[('exercised_stock_options 10', 22.61587301587296),
- ('total_payments 3', 16.396472663139342),
- ('bonus 5', 12.691184549108078),
- ('restricted_stock 13', 12.428995637611505),
- ('expenses 9', 11.55927827692415),
- ('other 11', 6.7696506365557525),
- ('deferral_payments 2', 6.6073282895712682),
- ('long_term_incentive 12', 5.6634920634920629),
- ('total_stock_value 8', 2.177777777777778),
- ('deferred_income 7', 1.8201058201058213),
- ('salary 1', 1.2698412698412704),
+[('exercised_stock_options 10', 25.609897292250217),
+ ('expenses 9', 19.55805317295998),
+ ('fraction_to_poi 16', 15.443537414966045),
+ ('deferred_income 7', 10.562238930659962),
+ ('fraction_to_shared_with_poi 17', 8.3687479568486491),
+ ('total_stock_value 8', 5.2544573384909521),
+ ('restricted_stock 13', 4.2721533057667491),
+ ('total_payments 3', 3.5785336356764925),
+ ('bonus 5', 3.1661375661375666),
+ ('long_term_incentive 12', 2.2391534391534389),
+ ('salary 1', 1.2698412698412698),
+ ('other 11', 0.67724867724867721),
+ ('fraction_from_poi 15', 0.0),
  ('loan_advances 4', 0.0),
  ('director_fees 14', 0.0),
- ('restricted_stock_deferred 6', 0.0)]
+ ('restricted_stock_deferred 6', 0.0),
+ ('deferral_payments 2', 0.0)]
      '''
 
     # find correlated fields between important features for task 3

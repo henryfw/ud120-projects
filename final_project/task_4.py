@@ -1,16 +1,22 @@
 
 from sklearn.naive_bayes import GaussianNB
-from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
-
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 
 def get_classifier_dict():
     classifier_dict = {
-        'nb' : GaussianNB(),
-        'dt' : tree.DecisionTreeClassifier(min_samples_split=1),
-        #'svm' : SVC()
-    } 
+        'nb' : GaussianNB,
+        'dt' : DecisionTreeClassifier,
+        'svm' : SVC,
+        'ada' : AdaBoostClassifier,
+        'rf' : RandomForestClassifier
+    }
+
+    print "get_classifier_dict: ", get_classifier_dict
+
     return classifier_dict
 
 

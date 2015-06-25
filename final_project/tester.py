@@ -66,15 +66,17 @@ def test_classifier(clf, dataset, feature_list, folds = 1000):
         print PERF_FORMAT_STRING.format(accuracy, precision, recall, f1, f2, display_precision = 5)
         print RESULTS_FORMAT_STRING.format(total_predictions, true_positives, false_positives, false_negatives, true_negatives)
         print ""
+        return {
+            'accuracy' : accuracy,
+            'precision' : precision,
+            'recall' : recall,
+            'f1' : f1
+        }
     except:
         print "Got a divide by zero when trying out:", clf
 
-    return {
-        'accuracy' : accuracy,
-        'precision' : precision,
-        'recall' : recall,
-        'f1' : f1
-    }
+    return None
+
 
 CLF_PICKLE_FILENAME = "my_classifier.pkl"
 DATASET_PICKLE_FILENAME = "my_dataset.pkl"

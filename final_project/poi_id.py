@@ -24,7 +24,7 @@ data_dict = task_2.remove_outlier(data_dict)
 
 ### Task 3: Create new feature(s)
 ### Store to my_dataset for easy export below.
-my_dataset = task_3.normalize_data(data_dict)
+my_dataset = task_3.prepare_data(data_dict)
 
 ### Extract features and labels from dataset for local testing
 features_list = task_3.get_feature_list() # new list after task 3
