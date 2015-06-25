@@ -15,7 +15,7 @@ def get_classifier_dict():
         'rf' : RandomForestClassifier
     }
 
-    print "get_classifier_dict: ", get_classifier_dict
+    print "get_classifier_dict: ", [ i for i in classifier_dict ]
 
     return classifier_dict
 

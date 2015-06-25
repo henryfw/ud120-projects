@@ -4,7 +4,7 @@ import pprint
 import operator
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
-from tester import test_classifier, dump_classifier_and_data
+from tester import test_classifier_custom, dump_classifier_and_data
 
 from sklearn.tree import DecisionTreeClassifier
 import task_1, task_2, task_3, task_4
@@ -25,14 +25,14 @@ def run():
 
 def get_best_classifier(classifier_dict, data_dict):
 
-    features_list = task_3.get_feature_list()
-
     all_results = []
     for name, clf in classifier_dict.iteritems():
 
+        print "Testing " + name
+
         if name == 'nb':
             classifier = clf()
-            r = test_classifier(classifier, data_dict, features_list)
+            r = test_classifier_custom(classifier, data_dict, features_list)
             if r is not None:
                 r['classifier'] = classifier
                 all_results.append(r)
@@ -40,7 +40,7 @@ def get_best_classifier(classifier_dict, data_dict):
         if name == 'ada':
             for param in  [2, 10, 20, 30] :
                 classifier = clf(base_estimator = DecisionTreeClassifier(min_samples_split = param))
-                r = test_classifier(classifier, data_dict, features_list)
+                r = test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                 all_results.append(r)
@@ -50,7 +50,7 @@ def get_best_classifier(classifier_dict, data_dict):
             #parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
             for param in  [1, 2, 5, 10, 15, 20, 25, 30] :
                 classifier = clf(min_samples_split = param)
-                r = test_classifier(classifier, data_dict, features_list)
+                r = test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                     all_results.append(r)
@@ -60,7 +60,7 @@ def get_best_classifier(classifier_dict, data_dict):
             #parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
             for param in  [10, 25, 50, 100] :
                 classifier = clf(min_samples_split = 20, n_estimators = param)
-                r = test_classifier(classifier, data_dict, features_list)
+                r = test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                     all_results.append(r)
@@ -69,7 +69,7 @@ def get_best_classifier(classifier_dict, data_dict):
             for param_2 in ('linear', 'rbf') :
                 for param in  [10., 100., 1000., 10000.] :
                     classifier = clf(kernel = param_2, C = param)
-                    r = test_classifier(classifier, data_dict, features_list)
+                    r = test_classifier_custom(classifier, data_dict, features_list)
                     if r is not None:
                         r['classifier'] = classifier
                         all_results.append(r)
@@ -81,23 +81,16 @@ def get_best_classifier(classifier_dict, data_dict):
     print "Top 10 Classifiers: "
     pprint.pprint(all_results[0:10])
 
-
     with open('task_5_results.pkl', 'w') as f:
         cPickle.dump(all_results, f)
 
-    # hard code the winner in case modified tester file is not used
-    best_clf = DecisionTreeClassifier(min_samples_split = 20)
+    best_clf = all_results[0]['classifier']
 
     # save to plk file
     with open('my_classifier.pkl', 'w') as f:
         cPickle.dump(best_clf, f)
 
-    if len(all_results) > 0 :
-        # this result depends on using the modified tester file
-        return  all_results[0]['classifier']
-    else :
-        # if the modified tester file is not avail, then hard code the result
-        return best_clf
+    return best_clf
 
 
 

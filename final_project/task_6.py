@@ -1,4 +1,4 @@
-# in this audacious bonus task, we iterate over all combination of x (17 choose x) features and use decision tree with min_samples_split = 10
+# in this audacious bonus task, we iterate over all combination of 4 features and use decision tree with min_samples_split = 10
 
 
 import cPickle
@@ -6,7 +6,7 @@ import sys
 import pprint
 sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
-from tester import test_classifier, dump_classifier_and_data
+from tester import test_classifier_custom, dump_classifier_and_data
 
 from time import time
 from sklearn.tree import DecisionTreeClassifier
@@ -16,46 +16,47 @@ import task_1, task_2, task_3, task_4
 def run() :
     start_time = time()
 
+    all_feature_list = task_1.get_all_possible_feature_list()
     data_dict = cPickle.load(open("final_project_dataset.pkl", "r") )
     data_dict = task_2.remove_outlier(data_dict)
+    data_dict = task_3.prepare_data(data_dict, all_feature_list, False) # normalized data
 
-    all_feature_list = task_1.get_all_possible_feature_list()
-
-
-    all_results = []
-    clf = DecisionTreeClassifier(min_samples_split=10)
-
-    total_features = len(all_feature_list)
-    total_fields = 5
-
-    # need at least 2 not None fields. for total_field 5, it's 20 choose 5 = 15504. ~6 hours on MBP i7
-    for i in range(total_fields - 2):
+    for i in range(2):
         all_feature_list.append(None)
 
-    i = [ 0 for i in range(total_fields + 1) ]
+    all_results = []
+    completed_hashes = {}
 
-    for i[1] in range(1, total_features - (total_fields - 1)) :
-        for i[2] in range(i[1] + 1, total_features - (total_fields - 2)) :
-            for i[3] in range(i[2] + 1, total_features - (total_fields - 3)) :
-                for i[4] in range(i[3] + 1, total_features - (total_fields - 4)):
-                    for i[5] in range(i[4] + 1, total_features) :
-                        features_list = ['poi']
-                        for j in range(1, total_fields + 1):
-                            if i[j] is not None:
-                                features_list.append(all_feature_list[i[j]])
+    for i1 in all_feature_list[1:] :
+        for i2 in all_feature_list[2:] :
+            for i3 in all_feature_list[3:] :
+                for i4 in all_feature_list[4:] :
+                    features_list = ['poi']
+                    if i1 is not None: features_list.append(i1)
+                    if i2 is not None: features_list.append(i2)
+                    if i3 is not None: features_list.append(i3)
+                    if i4 is not None: features_list.append(i4)
 
-                        data_dict = task_3.prepare_data(data_dict, features_list, False) # normalized data
-                        features_list = task_3.get_feature_list(features_list, False) # get normalized fields
-                        data = featureFormat(data_dict, features_list, sort_keys = True)
-                        labels, features = targetFeatureSplit(data)
+                    if not is_unique_list(features_list):
+                        continue
+                    hash = '-'.join(sorted(features_list))
+                    if hash in completed_hashes :
+                        continue
+                    completed_hashes[hash] = 1
 
-                        r = test_classifier(clf, data_dict, features_list)
-                        if r is not None:
-                            r['classifier'] = clf
-                            r['importances'] = clf.feature_importances_
-                            r['feature_list'] = features_list[1:]
-                            r['feature_total'] = len(features_list) - 1
-                            all_results.append(r)
+                    tmp = len(completed_hashes)
+                    if tmp % 500 == 1 :
+                        print "Testing %d ..." % tmp
+
+                    features_list = task_3.get_feature_list(features_list, False) # get normalized fields
+
+                    clf = DecisionTreeClassifier(min_samples_split=10)
+                    r = test_classifier_custom(clf, data_dict, features_list)
+                    if r is not None:
+                        r['classifier'] = clf
+                        r['importances'] = clf.feature_importances_
+                        r['feature_list'] = features_list
+                        all_results.append(r)
 
 
     all_results = sorted(all_results, key = lambda x :
@@ -67,12 +68,12 @@ def run() :
     print "Top 10 Feature List: "
     pprint.pprint(all_results[0:10])
 
-    with open('task_6_results_for_%d_vars.pkl' % total_fields, 'w') as f:
+    with open('task_6_results.pkl', 'w') as f:
         cPickle.dump(all_results, f)
-
 
     # do most popular fields
     fields = {}
+    field_importances = {}
     for r in all_results[0:10] :
         feature_list = r['feature_list']
         for i in feature_list :
@@ -81,12 +82,19 @@ def run() :
             if i not in fields :
                 fields[i] = 0
             fields[i] += 1
+        for i in range(len(r['importances'])) :
+            field = feature_list[i + 1]
+            if field not in field_importances :
+                field_importances[field] = 0
+            field_importances[field] += r['importances'][i]
 
-    print "Most used fields in top 10"
-    pprint.pprint(all_results[0:10])
+    fields = sorted(fields.items(), key = lambda x : x[1], reverse = True)
+    field_importances = sorted(field_importances.items(), key = lambda x : x[1], reverse = True)
 
-    with open('task_6_results_for_%d_fields.pkl' % total_fields, 'w') as f:
-        cPickle.dump(fields, f)
+    print "Most used fields/importances in top 10:"
+    pprint.pprint(fields)
+    pprint.pprint(field_importances)
+
 
 
 def is_unique_list(x) :
