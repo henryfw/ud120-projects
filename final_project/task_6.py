@@ -22,21 +22,23 @@ def run() :
     data_dict = task_3.prepare_data(data_dict, all_feature_list, False) # normalized data
 
     for i in range(2):
-        all_feature_list.append(None)
+        all_feature_list.append('_none_' + str(i))
 
     all_results = []
     completed_hashes = {}
+    clf = DecisionTreeClassifier(min_samples_split=10)
 
     for i1 in all_feature_list[1:] :
         for i2 in all_feature_list[2:] :
             for i3 in all_feature_list[3:] :
                 for i4 in all_feature_list[4:] :
                     features_list = ['poi']
-                    if i1 is not None: features_list.append(i1)
-                    if i2 is not None: features_list.append(i2)
-                    if i3 is not None: features_list.append(i3)
-                    if i4 is not None: features_list.append(i4)
+                    if i1[0:6] != '_none_': features_list.append(i1)
+                    if i2[0:6] != '_none_': features_list.append(i2)
+                    if i3[0:6] != '_none_': features_list.append(i3)
+                    if i4[0:6] != '_none_': features_list.append(i4)
 
+                    # need to do nCr more efficiently
                     if not is_unique_list(features_list):
                         continue
                     hash = '-'.join(sorted(features_list))
@@ -50,8 +52,11 @@ def run() :
 
                     features_list = task_3.get_feature_list(features_list, False) # get normalized fields
 
-                    clf = DecisionTreeClassifier(min_samples_split=10)
-                    r = test_classifier_custom(clf, data_dict, features_list)
+                    r = None
+                    try:
+                        r = test_classifier_custom(clf, data_dict, features_list)
+                    except ValueError:
+                        print features_list, ValueError
                     if r is not None:
                         r['classifier'] = clf
                         r['importances'] = clf.feature_importances_
@@ -95,7 +100,7 @@ def run() :
     pprint.pprint(fields)
     pprint.pprint(field_importances)
 
-
+    return all_results[0]
 
 def is_unique_list(x) :
     return len(x) == len(set(x))

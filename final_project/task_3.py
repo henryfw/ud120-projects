@@ -37,7 +37,6 @@ def get_feature_list(feature_list = None, write_pickle = True) :
         else:
             new_feature_list.append(field + '_n')
 
-    print "task_4 get_feature_list: ", new_feature_list
 
     # write to custom pkl file
     if write_pickle:
