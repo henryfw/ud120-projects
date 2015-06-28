@@ -11,12 +11,12 @@ from sklearn.tree import DecisionTreeClassifier
 features_list = data_dict = cPickle.load(open("my_feature_list.pkl", "r") )
 data_dict = cPickle.load(open("my_dataset.pkl", "r") )
 
-all_results = {}
+all_results = []
 
 def run():
     for split_num in range(5, 51, 5) :
         clf = DecisionTreeClassifier(min_samples_split=split_num)
-        all_results[split_num] = None
+
         print "Running split_num: %d" % split_num
 
         total_precision = 0.
@@ -30,13 +30,18 @@ def run():
             total_accuracy += r['accuracy']
             total_recall += r['recall']
 
-        all_results[split_num] = {
+        all_results.append( {
+            'split_num' : split_num,
             'precision' : total_precision / total_trials,
             'accuracy' : total_accuracy / total_trials,
             'recall' : total_recall / total_trials,
-        }
+        })
 
     pprint.pprint(all_results)
+
+    csv_data = [ "%d,%f,%f\n" % (i['split_num'], i['precision'], i['recall']) for i in all_results ]
+    with open("task_7_data.csv", "w") as f:
+        f.writelines(csv_data)
 
     with open('task_7_results.pkl', 'w') as f:
         cPickle.dump(all_results, f)
