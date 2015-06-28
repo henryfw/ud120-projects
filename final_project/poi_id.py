@@ -45,9 +45,8 @@ classifer_dict = task_4.get_classifier_dict()
 ### Because of the small size of the dataset, the script uses stratified
 ### shuffle split cross validation. For more info: 
 ### http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.StratifiedShuffleSplit.html
-
+clf = task_5.get_best_classifier(classifer_dict, my_dataset)
 
 ### Dump your classifier, dataset, and features_list so 
 ### anyone can run/check your results.
-clf = task_5.get_best_classifier(classifer_dict, my_dataset)
 dump_classifier_and_data(clf, my_dataset, features_list)

@@ -9,7 +9,7 @@ from sklearn import tree
 from scipy import stats
 from sklearn.decomposition import *
 
-import task_2, task_3, task_3_helper
+import task_1_get_feature_list, task_2, task_3, task_3_helper
 
 
 # remove outlier that we find later and add new feature to test pca
@@ -31,13 +31,7 @@ def get_all_possible_feature_list() :
 
 # fields after investigating with the run() function
 def get_feature_list() :
-
-    # from dt importance: 'exercised_stock_options', 'total_payments', 'bonus'
-    # items = ['poi', 'exercised_stock_options', 'total_payments', 'bonus' ]
-
-    # from pca 1st component:  'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options'
-    items = ['poi', 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options', 'fraction_to_shared_with_poi' ]
-    return items
+    return task_1_get_feature_list.get_feature_list()
 
 
 def run() :
@@ -52,6 +46,7 @@ def test_pca_eigenvalue() :
     pca = PCA().fit(features)
     eigenfaces = pca.explained_variance_ratio_
 
+    print all_feature_list[1:]
     print [ "%.5f" % i for i in eigenfaces ]
     print [ "%.5f" % abs(i) for i in pca.components_[0] ]
 '''
@@ -102,7 +97,7 @@ def test_dt_importance():
      '''
 
     # find correlated fields between important features for task 3
-    top_features_index = [10,3,5,13,9]
+    top_features_index = [10,9,16,7,17]
     text = ""
     for i in top_features_index:
         for j in top_features_index:
@@ -110,14 +105,14 @@ def test_dt_importance():
         text += "\n"
     print text
 '''
-1.000 0.692 0.290 0.539 0.441
-0.692 1.000 0.860 0.623 0.891
-0.290 0.860 1.000 0.544 0.826
-0.539 0.623 0.544 1.000 0.339
-0.441 0.891 0.826 0.339 1.000
+1.000 0.470 0.238 0.524 0.587
+0.470 1.000 -0.107 0.070 0.709
+0.238 -0.107 1.000 0.386 0.285
+0.524 0.070 0.386 1.000 0.620
+0.587 0.709 0.285 0.620 1.000
 '''
 
-    # use top 3 ['exercised_stock_options', 'total_payments', 'bonus' ]
+
 
 if __name__ == '__main__':
     run()

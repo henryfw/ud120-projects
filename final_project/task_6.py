@@ -5,7 +5,6 @@ import cPickle
 import sys
 import pprint
 sys.path.append("../tools/")
-from feature_format import featureFormat, targetFeatureSplit
 from tester import test_classifier_custom, dump_classifier_and_data
 
 from time import time
