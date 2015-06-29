@@ -1,6 +1,4 @@
 
-
-
 import cPickle
 import sys
 import pprint
@@ -9,7 +7,6 @@ sys.path.append("../tools/")
 from feature_format import featureFormat, targetFeatureSplit
 
 import matplotlib.pyplot
-import task_1_get_feature_list
 
 
 my_dataset = cPickle.load(open("final_project_dataset.pkl", "r") )

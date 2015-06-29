@@ -9,7 +9,7 @@ from sklearn import tree
 from scipy import stats
 from sklearn.decomposition import *
 
-import task_1_get_feature_list, task_2, task_3, task_3_helper
+import task_2, task_3, task_3_helper
 
 
 # remove outlier that we find later and add new feature to test pca
@@ -31,7 +31,7 @@ def get_all_possible_feature_list() :
 
 # fields after investigating with the run() function
 def get_feature_list() :
-    return task_1_get_feature_list.get_feature_list()
+    return ['poi', 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options', 'fraction_to_shared_with_poi' ]
 
 
 def run() :
@@ -46,6 +46,10 @@ def test_pca_eigenvalue() :
     pca = PCA().fit(features)
     eigenfaces = pca.explained_variance_ratio_
 
+    csv_data = ([ "%s,%f\n" % (all_feature_list[i + 1], pca.components_[0][i]) for i in range(len(pca.components_[0])) ])
+    with open("task_1_pca_data.csv", "w") as f:
+        f.writelines(csv_data)
+
     print all_feature_list[1:]
     print [ "%.5f" % i for i in eigenfaces ]
     print [ "%.5f" % abs(i) for i in pca.components_[0] ]
@@ -53,6 +57,7 @@ def test_pca_eigenvalue() :
 ['0.00825', '0.00689', '0.68172', '0.51338', '0.05344', '0.00500', '0.00689', '0.40506', '0.00057', '0.29293', '0.07376', '0.02762', '0.11211', '0.00017', '0.00000', '0.00000']
 # first component is has high abs values for 'total_payments', 'loan_advances', 'total_stock_value', 'exercised_stock_options'
 '''
+
 
 def test_dt_importance():
     clf = tree.DecisionTreeClassifier(min_samples_split=10)

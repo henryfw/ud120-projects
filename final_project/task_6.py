@@ -1,11 +1,11 @@
-# in this audacious bonus task, we iterate over all combination of 4 features and use decision tree with min_samples_split = 10
+# we iterate over all combination of 4 features and use decision tree with min_samples_split = 10
 
 
 import cPickle
 import sys
 import pprint
 sys.path.append("../tools/")
-from tester import test_classifier_custom, dump_classifier_and_data
+from task_5_tester import test_classifier_custom
 
 from time import time
 from sklearn.tree import DecisionTreeClassifier

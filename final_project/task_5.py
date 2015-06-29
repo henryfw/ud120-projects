@@ -3,11 +3,10 @@ import sys
 import pprint
 import operator
 sys.path.append("../tools/")
-from feature_format import featureFormat, targetFeatureSplit
-from tester import test_classifier_custom, dump_classifier_and_data
+from feature_format import featureFormat, targetFeatureSplit 
 
 from sklearn.tree import DecisionTreeClassifier
-import task_1, task_2, task_3, task_4
+import task_1, task_2, task_3, task_4, task_5_tester
 
 
 data_dict = cPickle.load(open("final_project_dataset.pkl", "r") )
@@ -32,7 +31,7 @@ def get_best_classifier(classifier_dict, data_dict):
 
         if name == 'nb':
             classifier = clf()
-            r = test_classifier_custom(classifier, data_dict, features_list)
+            r = task_5_tester.test_classifier_custom(classifier, data_dict, features_list)
             if r is not None:
                 r['classifier'] = classifier
                 all_results.append(r)
@@ -40,7 +39,7 @@ def get_best_classifier(classifier_dict, data_dict):
         if name == 'ada':
             for param in  [2, 10, 20, 30] :
                 classifier = clf(base_estimator = DecisionTreeClassifier(min_samples_split = param))
-                r = test_classifier_custom(classifier, data_dict, features_list)
+                r = task_5_tester.test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                 all_results.append(r)
@@ -50,7 +49,7 @@ def get_best_classifier(classifier_dict, data_dict):
             #parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
             for param in  [1, 2, 5, 10, 15, 20, 25, 30] :
                 classifier = clf(min_samples_split = param)
-                r = test_classifier_custom(classifier, data_dict, features_list)
+                r = task_5_tester.test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                     all_results.append(r)
@@ -60,7 +59,7 @@ def get_best_classifier(classifier_dict, data_dict):
             #parameters = {'kernel':('linear', 'rbf'), 'C':[1, 10]}
             for param in  [10, 25, 50, 100] :
                 classifier = clf(min_samples_split = 20, n_estimators = param)
-                r = test_classifier_custom(classifier, data_dict, features_list)
+                r = task_5_tester.test_classifier_custom(classifier, data_dict, features_list)
                 if r is not None:
                     r['classifier'] = classifier
                     all_results.append(r)
@@ -69,7 +68,7 @@ def get_best_classifier(classifier_dict, data_dict):
             for param_2 in ('linear', 'rbf') :
                 for param in  [10., 100., 1000., 10000.] :
                     classifier = clf(kernel = param_2, C = param)
-                    r = test_classifier_custom(classifier, data_dict, features_list)
+                    r = task_5_tester.test_classifier_custom(classifier, data_dict, features_list)
                     if r is not None:
                         r['classifier'] = classifier
                         all_results.append(r)
@@ -80,6 +79,11 @@ def get_best_classifier(classifier_dict, data_dict):
 
     print "Top 10 Classifiers: "
     pprint.pprint(all_results[0:10])
+
+    csv_data = [ "%s,%.3f,%.3f,%.3f\n" %
+        ( str_clf(r['classifier']), r['precision'], r['recall'], r['precision'] + r['recall']) for r in all_results[0:10] ]
+    with open("task_5_top_10_data.csv", "w") as f:
+        f.writelines(csv_data)
 
     with open('task_5_results.pkl', 'w') as f:
         cPickle.dump(all_results, f)
@@ -93,6 +97,9 @@ def get_best_classifier(classifier_dict, data_dict):
     return best_clf
 
 
+
+def str_clf(clf) :
+    return  '"' + str(clf).replace("\n", " ").replace("\r", " ") + '"'
 
 if __name__ == '__main__':
     run()
